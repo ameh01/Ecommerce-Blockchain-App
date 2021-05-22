@@ -10,15 +10,15 @@ contract PaymentProcessor {
         address payer,
         uint amount,
         uint paymentId,
-        uint date,
-    )
+        uint date
+    );
 
     constructor(address adminAddress, address daiAddress) public {
         admin = adminAddress;
         dai = IERC20(daiAddress);
     }
 
-    function pay(unit amount, uint paymentId) external {
+    function pay(uint amount, uint paymentId) external {
         dai.transferFrom(msg.sender, admin, amount);
         emit PaymentDone(msg.sender, amount, paymentId, block.timestamp);
     }
